@@ -7,27 +7,28 @@ import kha.graphics2.Graphics;
 class Group<T : Object> {
     var elements : Array<T>;
     
-    public inline function new() {
+    public function new() {
         elements = new Array<T>();
     }
     
-    public inline function update() : Void {
+    public function update() : Void {
         for (e in elements) {
             if (e.isActive) e.update();
         }
     }
     
-    public inline function draw(g : Graphics) : Void {
+    public function draw(g : Graphics) : Void {
         for (e in elements) {
             if (e.isVisible) e.draw(g);
         }
     }
     
-    public inline function add(e : T) : Void {
+    public function add(e : T) : T {
         elements.push(e);
+        return e;
     }
     
-    public inline function each(f : T->Void) {
+    public function each(f : T->Void) {
         for (e in elements) f(e);
     }
 }
