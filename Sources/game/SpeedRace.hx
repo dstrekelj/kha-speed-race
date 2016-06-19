@@ -16,20 +16,20 @@ class SpeedRace {
 	public static inline var WIDTH : Int = 240;
 	public static inline var HEIGHT : Int = 320;
 	
-	static inline var MAX_V : Float = 6;
-	static inline var DV : Float = 3;
+	static inline var velocityMax : Float = 6;
+	static inline var velocityStep : Float = 3;
+	
+	var velocity : Float;
 	
 	var backbuffer : Image;
 	
 	var player : PlayerCar;
 	var road : Road;
 	
-	var v : Float;
-	
 	public function new() {
 		if (Keyboard.get() != null) Keyboard.get().notify(onKeyDown, onKeyUp);
 		
-		v = 0;
+		velocity = 0;
 		
 		backbuffer = Image.createRenderTarget(WIDTH, HEIGHT);
 		
@@ -37,6 +37,9 @@ class SpeedRace {
 		player.setCenterPosition(WIDTH / 2, HEIGHT * 2 / 3);
 		
 		road = new Road(20, Assets.images.road_segment);
+		
+		Car.X_MIN = 20;
+		Car.X_MAX = SpeedRace.WIDTH - 20;
 	}
 
 	public function update() : Void {
@@ -58,19 +61,25 @@ class SpeedRace {
 		framebuffer.g2.end();	
 	}
 	
-	private function updateVelocity(dv : Float) : Void {
-		v += dv;
-		v = (v < 0) ? 0 : ((v > MAX_V) ? MAX_V : v);
-		road.updateVelocity(v);
+	private function updateVelocity(step : Float) : Void {
+		velocity += step;
+		velocity = (velocity < 0) ? 0 : ((velocity > velocityMax) ? velocityMax : velocity);
+		road.updateVelocity(velocity);
 	}
 	
 	private function onKeyDown(key : Key, char : String) : Void {
 		switch (char) {
-			case "w": updateVelocity(DV);
-			case "s": updateVelocity(-DV);
+			case "w": updateVelocity(velocityStep);
+			case "s": updateVelocity(-velocityStep);
+			case "a": player.updateMovement(velocity, -1);
+			case "d": player.updateMovement(velocity, 1);
 		}
 	}
 	
 	private function onKeyUp(key : Key, char : String) : Void {
+		switch (char) {
+			case "a": player.updateMovement(0, -1);
+			case "d": player.updateMovement(0, 1);
+		}
 	}
 }
