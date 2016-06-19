@@ -1,4 +1,8 @@
+<p align="center"><img src="screenshot.png" /></p>
+
 # kha-speed-race
+
+**Try it at [dstrekelj.github.io/kha-speed-race](http://dstrekelj.github.io/kha-speed-race)**.
 
 Sources for a Speed Race (1974) arcade video game clone, written in [Haxe](http://haxe.org/) using the [Kha](http://kha.tech/) framework.
 
