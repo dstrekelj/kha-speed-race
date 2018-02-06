@@ -1,8 +1,8 @@
 package game.tools;
 
-import game.tools.Object;
-
 import kha.graphics2.Graphics;
+
+import game.tools.Object;
 
 class Entity extends Object {
     public var isOverlapping : Bool;

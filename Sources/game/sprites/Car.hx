@@ -1,11 +1,10 @@
 package game.sprites;
 
-import game.SpeedRace;
-
-import game.tools.Sprite;
-
 import kha.Image;
 import kha.math.Vector2;
+
+import game.SpeedRace;
+import game.tools.Sprite;
 
 class Car extends Sprite {
     public static var X_MIN : Float = 0;

@@ -1,9 +1,9 @@
 package game.tools.ui;
 
-import game.tools.Object;
-
 import kha.Font;
 import kha.graphics2.Graphics;
+
+import game.tools.Object;
 
 class Text extends Object {
     public var font : Font;
