@@ -9,7 +9,7 @@ import kha.Assets;
 import kha.Color;
 import kha.Framebuffer;
 import kha.Image;
-import kha.Key;
+import kha.input.KeyCode;
 import kha.Scaler;
 import kha.Scheduler;
 import kha.System;
@@ -61,7 +61,7 @@ class SpeedRace {
 		scoreText = new Text(Assets.fonts.slkscr, 64);
 		
 		instructions = new Text(Assets.fonts.slkscr, 10);
-		instructions.value = "W - SPEED UP / RESTART. S - SPEED DOWN. A - LEFT. D - RIGHT.";
+		instructions.value = "UP - SPEED UP / RESTART. LEFT - LEFT. RIGHT - RIGHT.";
 		instructions.setCenterPosition(System.windowWidth() / 2, System.windowHeight() - instructions.height);
 		
 		Scheduler.addTimeTask(spawnCar, 0, 1);
@@ -152,23 +152,24 @@ class SpeedRace {
 		isRunning = false;
 		updateVelocity(-velocityMax);
 	}
-	
-	private function onKeyDown(key : Key, char : String) : Void {
-		switch (char) {
-			case "w":
-				if (!isRunning) startGame();
-				updateVelocity(velocityStep);
-			case "s": updateVelocity(-velocityStep);
-			case "a": player.updateMovement(velocity, -1);
-			case "d": player.updateMovement(velocity, 1);
-			case "x": isRunning = true;
+
+	public function onKeyDown(keyCode:KeyCode):Void {
+		switch (keyCode){
+			case KeyCode.Up: if (!isRunning) startGame();
+			updateVelocity(velocityStep);
+			case KeyCode.Left: player.updateMovement(velocity, -1);
+			case KeyCode.Right: player.updateMovement(velocity, 1);
+			case KeyCode.X: isRunning = true;
+			case KeyCode.Down: updateVelocity(velocityStep);
+		default: return;
 		}
 	}
-	
-	private function onKeyUp(key : Key, char : String) : Void {
-		switch (char) {
-			case "a": player.updateMovement(0, -1);
-			case "d": player.updateMovement(0, 1);
+
+	public function onKeyUp(keyCode:KeyCode):Void {
+		switch (keyCode){
+			case KeyCode.Left: player.updateMovement(0, -1);
+			case KeyCode.Right: player.updateMovement(0, 1);
+		default: return;
 		}
 	}
 }

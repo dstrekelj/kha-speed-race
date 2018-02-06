@@ -6,7 +6,7 @@ import kha.System;
 
 class Main {
 	public static function main() {
-		System.init({title: "kha-speed-race", width: 480, height: 640}, init);
+		System.init({title: "KHA SPEED RACE", width: 480, height: 640}, init);
 	}
 	
 	static function init() : Void {

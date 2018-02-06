@@ -1,9 +1,9 @@
 package game.sprites;
 
-import game.SpeedRace;
-
 import kha.Image;
 import kha.math.Random;
+
+import game.SpeedRace;
 
 class NpcCar extends Car {
     public function new(x : Float, y : Float, graphic : Image) {

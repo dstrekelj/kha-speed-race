@@ -1,9 +1,9 @@
 package game.tools;
 
-import game.tools.Entity;
-
 import kha.Image;
 import kha.graphics2.Graphics;
+
+import game.tools.Entity;
 
 class Sprite extends Entity {
     public var graphic : Image;
